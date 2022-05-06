@@ -1,5 +1,5 @@
-pragma solidity 0.7.6;
-pragma abicoder v2;
+pragma solidity 0.6.12;
+pragma experimental ABIEncoderV2;
 
 import '../interfaces/ILoftIncentivesController.sol';
 import '../interfaces/IMultiFeeDistribution.sol';
@@ -76,7 +76,7 @@ contract MultiFeeDistribution is IMultiFeeDistribution, Ownable {
 
   /* ========== CONSTRUCTOR ========== */
 
-  constructor(address _stakingToken) Ownable() {
+  constructor(address _stakingToken) public Ownable() {
     stakingToken = IMintableToken(_stakingToken);
     IMintableToken(_stakingToken).setMinter(address(this));
     // First reward MUST be the staking token or things will break

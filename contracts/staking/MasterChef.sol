@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity 0.7.6;
+pragma solidity 0.6.12;
 
 import '../interfaces/IMultiFeeDistribution.sol';
 import '../interfaces/IOnwardIncentivesController.sol';
@@ -74,7 +74,7 @@ contract MasterChef is Ownable {
     address _poolConfigurator,
     IMultiFeeDistribution _rewardMinter,
     uint256 _maxMintable
-  ) Ownable() {
+  ) public Ownable() {
     poolConfigurator = _poolConfigurator;
     rewardMinter = _rewardMinter;
     uint256 length = _startTimeOffset.length;
