@@ -1,7 +1,7 @@
 {
-  "name": "@aave/protocol-v2",
-  "version": "1.0.1",
-  "description": "Aave Protocol V2 smart contracts",
+  "name": "@loft/protocol",
+  "version": "1.0.0",
+  "description": "Loft Protocol smart contracts",
   "files": [
     "contracts",
     "artifacts"
