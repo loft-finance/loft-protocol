@@ -12,9 +12,9 @@ import { ICommonConfiguration, eEthereumNetwork } from '../../helpers/types';
 
 export const CommonsConfig: ICommonConfiguration = {
   MarketId: 'Commons',
-  ATokenNamePrefix: 'Aave interest bearing',
-  StableDebtTokenNamePrefix: 'Aave stable debt bearing',
-  VariableDebtTokenNamePrefix: 'Aave variable debt bearing',
+  ATokenNamePrefix: 'Loft interest bearing',
+  StableDebtTokenNamePrefix: 'Loft stable debt bearing',
+  VariableDebtTokenNamePrefix: 'Loft variable debt bearing',
   SymbolPrefix: '',
   ProviderId: 0, // Overriden in index.ts
   OracleQuoteCurrency: 'ETH',
