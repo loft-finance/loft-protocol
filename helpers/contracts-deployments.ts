@@ -55,6 +55,7 @@ import {
   UiPoolDataProviderV2V3Factory,
   UiIncentiveDataProviderV2V3,
   UiIncentiveDataProviderV2Factory,
+  MultiFeeDistributionFactory,
 } from '../types';
 import {
   withSaveAndVerify,
@@ -72,6 +73,14 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { LendingPoolLibraryAddresses } from '../types/LendingPoolFactory';
 import { UiPoolDataProvider } from '../types';
 import { eNetwork } from './types';
+
+export const deployMultiFeeDistribution = async (stakingTokenAddress: string, verify?: boolean) =>
+  withSaveAndVerify(
+    await new MultiFeeDistributionFactory(await getFirstSigner()).deploy(stakingTokenAddress),
+    eContractid.MultiFeeDistribution,
+    [stakingTokenAddress],
+    verify
+  );
 
 export const deployUiIncentiveDataProviderV2 = async (verify?: boolean) =>
   withSaveAndVerify(

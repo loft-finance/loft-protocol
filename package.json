@@ -82,6 +82,7 @@
     "mumbai:deployUIIncentivesV2V3": "hardhat --network mumbai deploy-UiIncentiveDataProviderV2V3 --verify",
     "matic:deployUIIncentivesV2V3": "hardhat --network matic deploy-UiIncentiveDataProviderV2V3 --verify",
     "dev:deployUIIncentivesProviderV2": "hardhat --network kovan deploy-UiIncentiveDataProviderV2 --verify",
+    "dev:deployMultiFeeDistribution": "hardhat --network kovan deploy-MultiFeeDistribution --token 0x4044D49c107A133c7b81f698Ea0133C114A25773 --verify",
     "main:deployUIIncentivesProviderV2": "hardhat --network main deploy-UiIncentiveDataProviderV2 --verify",
     "matic:deployUIIncentivesProviderV2": "hardhat --network matic deploy-UiIncentiveDataProviderV2 --verify",
     "mumbai:deployUIIncentivesProviderV2": "hardhat --network mumbai deploy-UiIncentiveDataProviderV2 --verify",
