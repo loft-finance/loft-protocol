@@ -4,10 +4,11 @@ import { deployMultiFeeDistribution } from '../../helpers/contracts-deployments'
 import { exit } from 'process';
 
 task(`deploy-${eContractid.MultiFeeDistribution}`, `Deploys the MultiFeeDistribution contract`)
-  .addFlag('verify', 'Verify MultiFeeDistribution contract via Etherscan API.')
   .addParam('token', 'Staking Token Address')
+  .addFlag('verify', 'Verify MultiFeeDistribution contract via Etherscan API.')
   .setAction(async ({ token, verify }, localBRE) => {
     await localBRE.run('set-DRE');
+
     if (!localBRE.network.config.chainId) {
       throw new Error('INVALID_CHAIN_ID');
     }

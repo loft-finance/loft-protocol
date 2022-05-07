@@ -1,18 +1,14 @@
+// SPDX-License-Identifier: agpl-3.0
 pragma solidity 0.6.12;
 pragma experimental ABIEncoderV2;
 
 import '../interfaces/ILoftIncentivesController.sol';
+import '../interfaces/IMintableToken.sol';
 import '../interfaces/IMultiFeeDistribution.sol';
 import '../dependencies/openzeppelin/contracts/IERC20.sol';
 import '../dependencies/openzeppelin/contracts/SafeERC20.sol';
 import '../dependencies/openzeppelin/contracts/SafeMath.sol';
 import '../dependencies/openzeppelin/contracts/Ownable.sol';
-
-interface IMintableToken is IERC20 {
-  function mint(address _receiver, uint256 _amount) external returns (bool);
-
-  function setMinter(address _minter) external returns (bool);
-}
 
 // Based on Ellipsis EPS Staker
 // https://github.com/ellipsis-finance/ellipsis/blob/master/contracts/EpsStaker.sol

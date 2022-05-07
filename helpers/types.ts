@@ -103,6 +103,7 @@ export enum eContractid {
   UiIncentiveDataProviderV2V3 = 'UiIncentiveDataProviderV2V3',
   UiIncentiveDataProviderV2 = 'UiIncentiveDataProviderV2',
   MultiFeeDistribution = 'MultiFeeDistribution',
+  LoftToken = 'LoftToken',
 }
 
 /*

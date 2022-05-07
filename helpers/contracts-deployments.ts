@@ -1,4 +1,4 @@
-import { Contract } from 'ethers';
+import { BigNumberish, Contract } from 'ethers';
 import { DRE, notFalsyOrZeroAddress } from './misc-utils';
 import {
   tEthereumAddress,
@@ -56,6 +56,7 @@ import {
   UiIncentiveDataProviderV2V3,
   UiIncentiveDataProviderV2Factory,
   MultiFeeDistributionFactory,
+  LoftTokenFactory,
 } from '../types';
 import {
   withSaveAndVerify,
@@ -73,6 +74,14 @@ import { HardhatRuntimeEnvironment } from 'hardhat/types';
 import { LendingPoolLibraryAddresses } from '../types/LendingPoolFactory';
 import { UiPoolDataProvider } from '../types';
 import { eNetwork } from './types';
+
+export const deployLoftToken = async (maxTotalSupply: BigNumberish, verify?: boolean) =>
+  withSaveAndVerify(
+    await new LoftTokenFactory(await getFirstSigner()).deploy(maxTotalSupply),
+    eContractid.LoftToken,
+    [maxTotalSupply as string],
+    verify
+  );
 
 export const deployMultiFeeDistribution = async (stakingTokenAddress: string, verify?: boolean) =>
   withSaveAndVerify(
