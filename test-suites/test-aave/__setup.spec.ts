@@ -32,6 +32,9 @@ import {
   authorizeWETHGateway,
   deployATokenImplementations,
   deployAaveOracle,
+  deployLoftToken,
+  deployMultiFeeDistribution,
+  deployLoftIncentivesController,
 } from '../../helpers/contracts-deployments';
 import { Signer } from 'ethers';
 import { TokenContractId, eContractid, tEthereumAddress, AavePools } from '../../helpers/types';
@@ -57,6 +60,7 @@ import {
   getLendingPool,
   getLendingPoolConfiguratorProxy,
   getPairsTokenAggregator,
+  getFirstSigner,
 } from '../../helpers/contracts-getters';
 import { WETH9Mocked } from '../../types/WETH9Mocked';
 
@@ -99,6 +103,18 @@ const buildTestEnv = async (deployer: Signer, secondaryWallet: Signer) => {
   console.time('setup');
   const aaveAdmin = await deployer.getAddress();
   const config = loadPoolConfig(ConfigNames.Aave);
+
+  //deploy loft token
+  const loftToken = await deployLoftToken('10000000000000000000000000');
+  const multiFeeDistribution = await deployMultiFeeDistribution(loftToken.address);
+  await waitForTx(await loftToken.setMinter(multiFeeDistribution.address));
+  const loftIncentivesController = await deployLoftIncentivesController(
+    [864000],
+    ['1000000000000000000'],
+    await (await getFirstSigner()).getAddress(),
+    '10000000000000000000000000'
+  );
+  await waitForTx(await multiFeeDistribution.setMinters([loftIncentivesController.address]));
 
   const mockTokens: {
     [symbol: string]: MockContract | MintableERC20 | WETH9Mocked;

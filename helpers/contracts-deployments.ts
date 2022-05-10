@@ -57,6 +57,7 @@ import {
   UiIncentiveDataProviderV2Factory,
   MultiFeeDistributionFactory,
   LoftTokenFactory,
+  LoftIncentivesControllerFactory,
 } from '../types';
 import {
   withSaveAndVerify,
@@ -75,11 +76,35 @@ import { LendingPoolLibraryAddresses } from '../types/LendingPoolFactory';
 import { UiPoolDataProvider } from '../types';
 import { eNetwork } from './types';
 
-export const deployLoftToken = async (maxTotalSupply: BigNumberish, verify?: boolean) =>
+export const deployLoftIncentivesController = async (
+  startTimeOffset: BigNumberish[],
+  rewardsPerSecond: BigNumberish[],
+  rewardMinter: string,
+  maxMintable: BigNumberish,
+  verify?: boolean
+) =>
   withSaveAndVerify(
-    await new LoftTokenFactory(await getFirstSigner()).deploy(maxTotalSupply),
+    await new LoftIncentivesControllerFactory(await getFirstSigner()).deploy(
+      startTimeOffset,
+      rewardsPerSecond,
+      rewardMinter,
+      maxMintable
+    ),
     eContractid.LoftToken,
-    [maxTotalSupply as string],
+    [
+      startTimeOffset as string[],
+      rewardsPerSecond as string[],
+      rewardMinter,
+      maxMintable as string,
+    ],
+    verify
+  );
+
+export const deployLoftToken = async (initialSupply: BigNumberish, verify?: boolean) =>
+  withSaveAndVerify(
+    await new LoftTokenFactory(await getFirstSigner()).deploy(initialSupply),
+    eContractid.LoftToken,
+    [initialSupply as string],
     verify
   );
 

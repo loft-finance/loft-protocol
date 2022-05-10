@@ -74,7 +74,7 @@ contract MultiFeeDistribution is IMultiFeeDistribution, Ownable {
 
   constructor(address _stakingToken) public Ownable() {
     stakingToken = IMintableToken(_stakingToken);
-    IMintableToken(_stakingToken).setMinter(address(this));
+    //IMintableToken(_stakingToken).setMinter(address(this));
     // First reward MUST be the staking token or things will break
     // related to the 50% penalty and distribution to locked balances
     rewardTokens.push(_stakingToken);

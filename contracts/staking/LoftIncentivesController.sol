@@ -34,8 +34,6 @@ contract LoftIncentivesController is Ownable {
     uint128 rewardsPerSecond;
   }
 
-  address public poolConfigurator;
-
   IMultiFeeDistribution public rewardMinter;
   uint256 public rewardsPerSecond;
   uint256 public immutable maxMintableTokens;
@@ -73,11 +71,9 @@ contract LoftIncentivesController is Ownable {
   constructor(
     uint128[] memory _startTimeOffset,
     uint128[] memory _rewardsPerSecond,
-    address _poolConfigurator,
     IMultiFeeDistribution _rewardMinter,
     uint256 _maxMintable
   ) public Ownable() {
-    poolConfigurator = _poolConfigurator;
     rewardMinter = _rewardMinter;
     uint256 length = _startTimeOffset.length;
     for (uint256 i = length - 1; i + 1 != 0; i--) {
@@ -97,9 +93,8 @@ contract LoftIncentivesController is Ownable {
     startTime = block.timestamp;
   }
 
-  // Add a new lp to the pool. Can only be called by the poolConfigurator.
-  function addPool(address _token, uint256 _allocPoint) external {
-    require(msg.sender == poolConfigurator);
+  // Add a new lp to the pool. Can only be called by the Owner.
+  function addPool(address _token, uint256 _allocPoint) external onlyOwner {
     require(poolInfo[_token].lastRewardTime == 0);
     _updateEmissions();
     totalAllocPoint = totalAllocPoint.add(_allocPoint);
